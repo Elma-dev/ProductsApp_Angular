@@ -7,6 +7,13 @@
       <h2 class="text-center text-danger">Products List</h2>
     </div>
     <div class="card-body">
+      <form >
+        <div class="input-group">
+          <label class="input-group-text">Keyword</label>
+          <input type="text" class="form-control">
+          <button class="btn btn-info"><i class="bi bi-search"></i></button>
+        </div>
+      </form>
         <table class="table">
           <thead>
             <tr>
@@ -18,18 +25,20 @@
               <td>{{p.id}}</td>
               <td>{{p.name}}</td>
               <td>{{p.price}}</td>
+
               <td>
-                <button class="btn btn-danger" (click)="deleteProduct(p)">
-                    <i class="bi bi-trash"></i>
-                </button>
-              </td>
-              <td>
-                <i [ngClass]="p.promotion==true?'bi-heart-fill' : 'bi-heart'" class="bi"></i>
+                <i [ngClass]="p.promotion==true?'bi-heart-fill text-success' : 'bi-heart'" class="bi"></i>
               </td>
               <td>
                 <button [ngClass]="p.promotion==true?'btn-warning':'btn-success'" class="btn" (click)="setPromotion(p)">
                   <span *ngIf="p.promotion==false">Promotion On</span>
                   <span *ngIf="p.promotion==true">Promotion Off</span>
+                </button>
+              </td>
+
+              <td>
+                <button class="btn btn-danger" (click)="deleteProduct(p)">
+                  <i class="bi bi-trash"></i>
                 </button>
               </td>
 
