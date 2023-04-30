@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {CustomersService} from "../services/customers.service";
 
 @Component({
   selector: 'app-customers',
@@ -8,20 +9,25 @@ import {Component, OnInit} from '@angular/core';
 export class CustomersComponent implements OnInit{
 
   customers! :Array<any>;
+  error!:string;
 
-  constructor() {
+  constructor(private customerServices:CustomersService){
   }
 
   ngOnInit(): void {
-    this.customers=[
-      {id:1,name:'Customer1',age:18},
-      {id:2,name:'Customer2',age:18},
-      {id:3,name:'Customer3',age:18},
-      {id:4,name:'Customer4',age:18},
-      {id:5,name:'Customer5',age:18},
-    ]
+    this.customerServices.allCustomers().subscribe({
+      next:(data)=>{
+        this.customers=data
+      },
+      error:(errorException)=>{
+        this.error=errorException;
+      }
+    })
 
   }
 
 
+  public deleteCustomer(c: any) {
+    this.customers.splice(this.customers.indexOf(c),1)
+  }
 }

@@ -1,5 +1,10 @@
 <div class="container mt-2">
-  <div class="card border-danger">
+  <ng-template #errors>
+    <div class="text-danger display-2 text-center">
+      {{error}}
+    </div>
+  </ng-template>
+  <div class="card border-danger" *ngIf="customers else errors">
     <div class="card-header">
         <h2 class="text-center">Customers List</h2>
     </div>
@@ -15,6 +20,11 @@
             <td>{{c.id}}</td>
             <td>{{c.name}}</td>
             <td>{{c.age}}</td>
+            <td>
+              <button class="btn btn-danger" (click)="deleteCustomer(c)">
+                <i class="bi bi-trash"></i>
+              </button>
+            </td>
           </tr>
         </tbody>
       </table>

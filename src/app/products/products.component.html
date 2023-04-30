@@ -1,5 +1,8 @@
 <div class="container mt-2">
-  <div class="card border-danger">
+  <ng-template #errors>
+    <div class="text-danger text-center display-2">{{exception}}</div>
+  </ng-template>
+  <div class="card border-danger" *ngIf="products else errors">
     <div class="card-header">
       <h2 class="text-center text-danger">Products List</h2>
     </div>
@@ -15,6 +18,11 @@
               <td>{{p.id}}</td>
               <td>{{p.name}}</td>
               <td>{{p.price}}</td>
+              <td>
+                <button class="btn btn-danger" (click)="deleteProduct(p)">
+                    <i class="bi bi-trash"></i>
+                </button>
+              </td>
 
             </tr>
 
