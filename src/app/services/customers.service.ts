@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Observable, of, throwError} from "rxjs";
 import {Customer} from "../models/customer.model";
+import {Product} from "../models/product.model";
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,9 @@ export class CustomersService {
   public deleteCustomer(id:number):Observable<boolean>{
     this.customers=this.customers.filter(c=>c.id!=id);
     return of(true);
+  }
+  public searchCustomers(keyword:string):Observable<Array<Customer>>{
+    return of(this.customers.filter(c=>c.name.includes(keyword)));
   }
 
 }

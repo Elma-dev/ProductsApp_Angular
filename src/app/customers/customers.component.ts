@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {CustomersService} from "../services/customers.service";
 import {Customer} from "../models/customer.model";
 import {Product} from "../models/product.model";
+import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-customers',
@@ -13,7 +14,12 @@ export class CustomersComponent implements OnInit{
   customers! :Array<Customer>;
   error!:string;
 
-  constructor(private customerServices:CustomersService){
+  formGroup!:FormGroup;
+
+  constructor(private customerServices:CustomersService,private formBuilder:FormBuilder){
+    this.formGroup=formBuilder.group({
+      keyword:this.formBuilder.control(null)
+    })
   }
 
   ngOnInit(): void {
@@ -38,5 +44,15 @@ export class CustomersComponent implements OnInit{
         this.error=e;
       }
     })
+  }
+
+  public searchCustomer() {
+    this.customerServices.searchCustomers(this.formGroup.value.keyword).subscribe({
+      next:(data)=>{
+        this.customers=data;
+      },
+      error:(err)=>this.error=err
+    })
+
   }
 }

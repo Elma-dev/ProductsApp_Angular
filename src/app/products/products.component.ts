@@ -61,7 +61,6 @@ export class ProductsComponent implements OnInit{
   searchProduct() {
     this.productsServices.searchProducts(this.formGroup.value.keyword).subscribe({
       next:(data)=>{
-        console.log(data)
         this.products=data;
       },
       error:(err)=>{
