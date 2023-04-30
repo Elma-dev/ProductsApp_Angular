@@ -33,4 +33,8 @@ export class ProductsService {
     }
     return throwError(()=>new Error("Operation it's not affected!"))
   }
+
+  public searchProducts(keyword:string):Observable<Array<Product>>{
+    return of(this.products.filter(p=>p.name.includes(keyword)));
+  }
 }
