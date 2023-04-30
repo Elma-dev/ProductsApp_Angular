@@ -23,4 +23,9 @@ export class CustomersService {
     return of(this.customers);
   }
 
+  public deleteCustomer(id:number):Observable<boolean>{
+    this.customers=this.customers.filter(c=>c.id!=id);
+    return of(true);
+  }
+
 }

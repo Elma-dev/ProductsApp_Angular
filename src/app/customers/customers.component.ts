@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CustomersService} from "../services/customers.service";
 import {Customer} from "../models/customer.model";
+import {Product} from "../models/product.model";
 
 @Component({
   selector: 'app-customers',
@@ -28,7 +29,14 @@ export class CustomersComponent implements OnInit{
   }
 
 
-  public deleteCustomer(c: any) {
-    this.customers.splice(this.customers.indexOf(c),1)
+  public deleteCustomer(c: Customer) {
+    this.customerServices.deleteCustomer(c.id).subscribe({
+      next:(data)=>{
+        this.customers.splice(this.customers.indexOf(c),1);
+      },
+      error:(e)=>{
+        this.error=e;
+      }
+    })
   }
 }

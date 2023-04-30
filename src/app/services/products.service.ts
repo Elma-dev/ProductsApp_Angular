@@ -19,4 +19,9 @@ export class ProductsService {
     if(Math.random()<0.5) return throwError(()=>new Error("Connexion Error"));
     return of(this.products);
   }
+
+  public deleteProduct(id:number):Observable<boolean>{
+    this.products=this.products.filter(p=>p.id!=id);
+    return of(true);
+  }
 }

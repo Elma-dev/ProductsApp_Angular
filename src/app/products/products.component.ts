@@ -26,8 +26,16 @@ export class ProductsComponent implements OnInit{
   }
 
 
-  public deleteProduct(p: any) {
-    let i=this.products.indexOf(p);
-    this.products.splice(i,1)
+  public deleteProduct(p: Product) {
+    this.productsServices.deleteProduct(p.id).subscribe({
+      next:(data)=>{
+        let i=this.products.indexOf(p);
+        this.products.splice(i,1)
+      },
+      error:e=>{
+        this.exception=e;
+      }
+    })
+
   }
 }
