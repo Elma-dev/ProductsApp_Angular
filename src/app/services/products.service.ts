@@ -51,7 +51,11 @@ export class ProductsService {
     return throwError(()=>new Error("Operation it's not affected!"))
   }
 
-  public searchProducts(keyword:string):Observable<Array<Product>>{
-    return of(this.products.filter(p=>p.name.includes(keyword)));
+  public searchProducts(keyword:string,page:number,size:number):Observable<PageProduct>{
+    let results=this.products.filter(p=>p.name.includes(keyword));
+    let nbr=~~(results.length/size);
+    let totalPages=results.length%size==0?nbr:nbr+1;
+    let pageProduct=results.slice(page*size,page*size+size)
+    return of({products:pageProduct,page:page,size:size,totalNbrPage:totalPages})
   }
 }

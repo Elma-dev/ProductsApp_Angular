@@ -17,6 +17,7 @@ export class ProductsComponent implements OnInit{
   page:number=0;
   nbrTotalPages!:number;
   listPageNbr !:Array<number>;
+  searchInAll:boolean=false;
   constructor(private productsServices:ProductsService,private formBuilder:FormBuilder) {
     this.formGroup=this.formBuilder.group({
       keyword:this.formBuilder.control(null)
@@ -77,9 +78,12 @@ export class ProductsComponent implements OnInit{
   }
 
   searchProduct() {
-    this.productsServices.searchProducts(this.formGroup.value.keyword).subscribe({
+    this.productsServices.searchProducts(this.formGroup.value.keyword,this.page,this.size).subscribe({
       next:(data)=>{
-        this.products=data;
+        this.products=data.products;
+        this.nbrTotalPages=data.totalNbrPage;
+        this.listPageNbr=Array(this.nbrTotalPages).fill(1).map((v,k)=>k)
+        this.searchInAll=true;
       },
       error:(err)=>{
         this.exception=err;
@@ -89,14 +93,17 @@ export class ProductsComponent implements OnInit{
 
   changePage(i: number) {
     this.page=i;
-    this.productsServices.getPageProduct(this.page,this.size).subscribe({
-      next:(data)=>{
-        this.products=data.products;
+    if(this.searchInAll==false)
+      this.productsServices.getPageProduct(this.page,this.size).subscribe({
+        next:(data)=>{
+          this.products=data.products;
 
-      },
-      error:(exceptionError)=>{
-        this.exception=exceptionError;
-      }
-    })
+        },
+        error:(exceptionError)=>{
+          this.exception=exceptionError;
+        }
+      })
+    else
+      this.searchProduct()
   }
 }
