@@ -13,6 +13,10 @@ export class ProductsComponent implements OnInit{
   products! :Array<Product>;
   exception! :string;
   formGroup! :FormGroup;
+  size:number=7;
+  page:number=0;
+  nbrTotalPages!:number;
+  listPageNbr !:Array<number>;
   constructor(private productsServices:ProductsService,private formBuilder:FormBuilder) {
     this.formGroup=this.formBuilder.group({
       keyword:this.formBuilder.control(null)
@@ -20,15 +24,29 @@ export class ProductsComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.productsServices.AllProduct.subscribe({
+    this.productsServices.getPageProduct(this.page,this.size).subscribe({
       next:(data)=>{
-        this.products=data;
+        this.products=data.products;
+        this.nbrTotalPages=data.totalNbrPage;
+        this.listPageNbr=Array(this.nbrTotalPages).fill(1).map((val,i)=>i);
+        console.log(this.listPageNbr);
       },
       error:(exceptionError)=>{
         this.exception=exceptionError;
       }
     })
   }
+
+  public allProducts():void{
+      this.productsServices.AllProduct.subscribe({
+        next:(data)=>{
+          this.products=data;
+        },
+        error:(exceptionError)=>{
+          this.exception=exceptionError;
+        }
+    })
+}
 
 
   public deleteProduct(p: Product) {
@@ -65,6 +83,19 @@ export class ProductsComponent implements OnInit{
       },
       error:(err)=>{
         this.exception=err;
+      }
+    })
+  }
+
+  changePage(i: number) {
+    this.page=i;
+    this.productsServices.getPageProduct(this.page,this.size).subscribe({
+      next:(data)=>{
+        this.products=data.products;
+
+      },
+      error:(exceptionError)=>{
+        this.exception=exceptionError;
       }
     })
   }

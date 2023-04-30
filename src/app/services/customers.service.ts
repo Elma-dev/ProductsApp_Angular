@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Observable, of, throwError} from "rxjs";
 import {Customer} from "../models/customer.model";
 import {Product} from "../models/product.model";
+import {UUID} from "angular2-uuid";
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +12,11 @@ export class CustomersService {
 
   constructor() {
     this.customers=[
-      {id:1,name:'Customer1',age:18},
-      {id:2,name:'Customer2',age:18},
-      {id:3,name:'Customer3',age:18},
-      {id:4,name:'Customer4',age:18},
-      {id:5,name:'Customer5',age:18},
+      {id:UUID.UUID(),name:'Customer1',age:18},
+      {id:UUID.UUID(),name:'Customer2',age:18},
+      {id:UUID.UUID(),name:'Customer3',age:18},
+      {id:UUID.UUID(),name:'Customer4',age:18},
+      {id:UUID.UUID(),name:'Customer5',age:18},
     ]
   }
 
@@ -24,7 +25,7 @@ export class CustomersService {
     return of(this.customers);
   }
 
-  public deleteCustomer(id:number):Observable<boolean>{
+  public deleteCustomer(id:string):Observable<boolean>{
     this.customers=this.customers.filter(c=>c.id!=id);
     return of(true);
   }

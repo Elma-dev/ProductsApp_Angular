@@ -46,6 +46,12 @@
 
           </tbody>
         </table>
+        <ul class="nav nav-pills">
+          <li *ngFor="let i of listPageNbr" class="btn ms-1"
+              [ngClass]="page==i?'btn-danger':'btn-outline-danger'" (click)="changePage(i)" >
+            {{i}}
+          </li>
+        </ul>
     </div>
   </div>
 </div>
