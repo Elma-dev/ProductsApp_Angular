@@ -1,1 +1,24 @@
-<p>customers works!</p>
+<div class="container mt-2">
+  <div class="card border-danger">
+    <div class="card-header">
+        <h2 class="text-center">Customers List</h2>
+    </div>
+    <div class="card-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Id</th> <th>Name</th> <th>Age</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let c of customers">
+            <td>{{c.id}}</td>
+            <td>{{c.name}}</td>
+            <td>{{c.age}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
