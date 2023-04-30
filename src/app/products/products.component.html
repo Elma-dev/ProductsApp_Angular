@@ -27,7 +27,7 @@
                 <i [ngClass]="p.promotion==true?'bi-heart-fill' : 'bi-heart'" class="bi"></i>
               </td>
               <td>
-                <button [ngClass]="p.promotion==true?'btn-warning':'btn-success'" class="btn" (click)="setPromotion(p.id)">
+                <button [ngClass]="p.promotion==true?'btn-warning':'btn-success'" class="btn" (click)="setPromotion(p)">
                   <span *ngIf="p.promotion==false">Promotion On</span>
                   <span *ngIf="p.promotion==true">Promotion Off</span>
                 </button>

@@ -39,10 +39,17 @@ export class ProductsComponent implements OnInit{
 
   }
 
-  setPromotion(id: number) {
-    let p=this.products.find(p=>p.id==id);
-    if(p)
-      p.promotion=!(p.promotion)
+  setPromotion(p: Product) {
+    let promo = p.promotion;
+    this.productsServices.setPromotion(p.id).subscribe({
+        next:(data)=>{
+          p.promotion = !(promo);
+        },
+        error:(e)=>{
+          this.exception=e;
+        }
+      })
+
 
   }
 }
