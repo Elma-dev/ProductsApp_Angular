@@ -23,6 +23,15 @@
                     <i class="bi bi-trash"></i>
                 </button>
               </td>
+              <td>
+                <i [ngClass]="p.promotion==true?'bi-heart-fill' : 'bi-heart'" class="bi"></i>
+              </td>
+              <td>
+                <button [ngClass]="p.promotion==true?'btn-warning':'btn-success'" class="btn" (click)="setPromotion(p.id)">
+                  <span *ngIf="p.promotion==false">Promotion On</span>
+                  <span *ngIf="p.promotion==true">Promotion Off</span>
+                </button>
+              </td>
 
             </tr>
 

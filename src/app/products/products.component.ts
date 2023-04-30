@@ -38,4 +38,11 @@ export class ProductsComponent implements OnInit{
     })
 
   }
+
+  setPromotion(id: number) {
+    let p=this.products.find(p=>p.id==id);
+    if(p)
+      p.promotion=!(p.promotion)
+
+  }
 }

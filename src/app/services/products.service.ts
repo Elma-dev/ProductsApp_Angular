@@ -9,9 +9,9 @@ export class ProductsService {
   private products! : Array<Product>;
   constructor() {
     this.products=[
-      {id:1,name:"Computer",price:12332},
-      {id:2,name:"Printer",price:4330},
-      {id:3,name:"Smart Phone",price:8233}
+      {id:1,name:"Computer",price:12332,promotion:false},
+      {id:2,name:"Printer",price:4330,promotion:false},
+      {id:3,name:"Smart Phone",price:8233,promotion:false}
     ]
   }
 
@@ -23,5 +23,14 @@ export class ProductsService {
   public deleteProduct(id:number):Observable<boolean>{
     this.products=this.products.filter(p=>p.id!=id);
     return of(true);
+  }
+
+  public setPromotion(id:number):Observable<boolean>{
+    let product = this.products.find(p=>p.id==id);
+    if(product) {
+      product.promotion = !(product.promotion)
+      return of(true);
+    }
+    return throwError(()=>new Error("Operation it's not affected!"))
   }
 }
