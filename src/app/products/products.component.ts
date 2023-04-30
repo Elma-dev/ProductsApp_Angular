@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ProductsService} from "../services/products.service";
+import {Product} from "../models/product.model";
 
 @Component({
   selector: 'app-products',
@@ -8,7 +9,7 @@ import {ProductsService} from "../services/products.service";
 })
 export class ProductsComponent implements OnInit{
 
-  products! :Array<any>;
+  products! :Array<Product>;
   exception!:string;
   constructor(private productsServices:ProductsService) {
   }

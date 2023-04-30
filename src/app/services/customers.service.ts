@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import {Observable, of, throwError} from "rxjs";
+import {Customer} from "../models/customer.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomersService {
-  private customers!:Array<any>;
+  private customers!:Array<Customer>;
 
   constructor() {
     this.customers=[
@@ -17,7 +18,7 @@ export class CustomersService {
     ]
   }
 
-  public allCustomers():Observable<Array<any>>{
+  public allCustomers():Observable<Array<Customer>>{
     if(Math.random()<0.5) return throwError(()=>new Error("Connexion Error"));
     return of(this.customers);
   }
