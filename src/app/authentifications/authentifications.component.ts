@@ -30,6 +30,11 @@ export class AuthentificationsComponent implements OnInit{
     this.authentificatService.login(username,password).subscribe({
       next:(data)=>{
         this.userApp=data;
+        this.authentificatService.authenticat(this.userApp).subscribe({
+          next:(data)=>{
+          },
+          error:(err)=>{this.error=err}
+        })
       },
       error:(err)=>{
         this.error=err;
