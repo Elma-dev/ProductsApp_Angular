@@ -4,6 +4,7 @@
       <span class="display-4">New Product</span>
     </div>
     <div class="card-body">
+      {{formGroup.value|json}}
       <form [formGroup]="formGroup" (ngSubmit)="addNewProduct()">
         <div >
           <label class="form-label fw-bold">Name</label>
