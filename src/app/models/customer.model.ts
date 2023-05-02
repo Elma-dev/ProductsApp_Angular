@@ -3,3 +3,11 @@ export interface Customer{
   name:string;
   age:number;
 }
+
+export interface CustomerPages{
+  customerPage:Array<Customer> ;
+  page : number;
+  size: number;
+  totalNbrPages: number;
+
+}

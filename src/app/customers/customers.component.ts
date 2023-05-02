@@ -13,8 +13,11 @@ export class CustomersComponent implements OnInit{
 
   customers! :Array<Customer>;
   error!:string;
-
   formGroup!:FormGroup;
+  size:number=5;
+  page:number=0;
+  totalNbrPage!:number;
+
 
   constructor(private customerServices:CustomersService,private formBuilder:FormBuilder){
     this.formGroup=formBuilder.group({
@@ -23,6 +26,11 @@ export class CustomersComponent implements OnInit{
   }
 
   ngOnInit(): void {
+
+
+  }
+
+  public getAllCustomer():Array<Customer>{
     this.customerServices.allCustomers().subscribe({
       next:(data)=>{
         this.customers=data
@@ -31,8 +39,9 @@ export class CustomersComponent implements OnInit{
         this.error=errorException;
       }
     })
-
+    return this.customers;
   }
+
 
 
   public deleteCustomer(c: Customer) {

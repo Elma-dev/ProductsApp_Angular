@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Observable, of, throwError} from "rxjs";
-import {Customer} from "../models/customer.model";
+import {Customer, CustomerPages} from "../models/customer.model";
 import {Product} from "../models/product.model";
 import {UUID} from "angular2-uuid";
 
@@ -31,6 +31,13 @@ export class CustomersService {
   }
   public searchCustomers(keyword:string):Observable<Array<Customer>>{
     return of(this.customers.filter(c=>c.name.includes(keyword)));
+  }
+
+  public getCustomerPage(page:number,size:number):Observable<CustomerPages>{
+    let nbrTotalePages=~~(this.customers.length/size);
+    nbrTotalePages=this.customers.length%size==0?nbrTotalePages:nbrTotalePages+1;
+    let customerPage=this.customers.slice(page*size,page*size+size);
+    return of({customerPage:customerPage,page:page,size:size,totalNbrPages:nbrTotalePages})
   }
 
 }
