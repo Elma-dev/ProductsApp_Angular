@@ -14,9 +14,10 @@ export class CustomersComponent implements OnInit{
   customers! :Array<Customer>;
   error!:string;
   formGroup!:FormGroup;
-  size:number=5;
+  size:number=7;
   page:number=0;
   totalNbrPage!:number;
+  pageIndex!:Array<number>;
 
 
   constructor(private customerServices:CustomersService,private formBuilder:FormBuilder){
@@ -26,8 +27,21 @@ export class CustomersComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    this.getCustomerPage(this.page,this.size);
+  }
 
+  public getCustomerPage(page:number,size:number):void{
+    this.customerServices.getCustomerPage(page,size).subscribe({
+      next:(data)=>{
+        this.customers=data.customerPage;
+        this.totalNbrPage=data.totalNbrPages;
+        this.pageIndex=Array(this.totalNbrPage).fill(1).map((v,k)=>k);
 
+      },
+      error:(err)=>{
+        this.error=err;
+      }
+    })
   }
 
   public getAllCustomer():Array<Customer>{
@@ -63,5 +77,9 @@ export class CustomersComponent implements OnInit{
       error:(err)=>this.error=err
     })
 
+  }
+
+  changePage(i: number) {
+    this.getCustomerPage(i,this.size);
   }
 }

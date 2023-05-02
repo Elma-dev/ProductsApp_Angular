@@ -18,6 +18,10 @@ export class CustomersService {
       {id:UUID.UUID(),name:'Customer4',age:18},
       {id:UUID.UUID(),name:'Customer5',age:18},
     ]
+
+    for(let i=0;i<50;i++){
+      this.customers.push({id:UUID.UUID(),name:'Customer'+(i+6),age:18+i})
+    }
   }
 
   public allCustomers():Observable<Array<Customer>>{
