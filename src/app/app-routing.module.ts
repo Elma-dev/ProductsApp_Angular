@@ -4,9 +4,10 @@ import {CustomersComponent} from "./customers/customers.component";
 import {ProductsComponent} from "./products/products.component";
 import {AuthentificationsComponent} from "./authentifications/authentifications.component";
 import {AdminComponent} from "./admin/admin.component";
+import {AuthenticationGuard} from "./guards/authentication.guard";
 
 const routes: Routes = [
-  {path:"admin",component:AdminComponent,children:[
+  {path:"admin",component:AdminComponent,canActivate:[AuthenticationGuard],children:[
       {path:"customers",component:CustomersComponent},
       {path:"products",component:ProductsComponent},
     ]},
