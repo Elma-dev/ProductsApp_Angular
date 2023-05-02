@@ -34,7 +34,7 @@ export class AuthentificationsService {
   public hasRole(role:string):Observable<boolean>{
     return of(this.authenticatUser!.roles.includes(role));
   }
-  public isAuthenticat():Observable<boolean>{
-    return of(this.authenticatUser!=undefined);
+  public isAuthenticat():boolean{
+    return (this.authenticatUser!=undefined);
   }
 }
