@@ -5,6 +5,7 @@ import {ProductsComponent} from "./products/products.component";
 import {AuthentificationsComponent} from "./authentifications/authentifications.component";
 import {AdminComponent} from "./admin/admin.component";
 import {AuthenticationGuard} from "./guards/authentication.guard";
+import {NewProductComponent} from "./new-product/new-product.component";
 
 const routes: Routes = [
   {path:"admin",component:AdminComponent,canActivate:[AuthenticationGuard],children:[
@@ -12,7 +13,8 @@ const routes: Routes = [
       {path:"products",component:ProductsComponent},
     ]},
   {path:"login",component:AuthentificationsComponent},
-  {path:"",component:AuthentificationsComponent}
+  {path:"",component:AuthentificationsComponent},
+  {path:"newProduct",component:NewProductComponent}
 ];
 
 @NgModule({
