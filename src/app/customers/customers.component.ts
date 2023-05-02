@@ -18,6 +18,7 @@ export class CustomersComponent implements OnInit{
   page:number=0;
   totalNbrPage!:number;
   pageIndex!:Array<number>;
+  itsSearch:boolean=false;
 
 
   constructor(private customerServices:CustomersService,private formBuilder:FormBuilder){
@@ -75,6 +76,7 @@ export class CustomersComponent implements OnInit{
         this.customers=data.customerPage;
         this.totalNbrPage=data.totalNbrPages;
         this.pageIndex=Array(this.totalNbrPage).fill(1).map((v,k)=>k)
+        this.itsSearch=true;
       },
       error:(err)=>this.error=err
     })
@@ -83,6 +85,9 @@ export class CustomersComponent implements OnInit{
 
   changePage(i: number) {
     this.page=i;
-    this.getCustomerPage(i,this.size);
+    if(this.itsSearch)
+      this.searchCustomer()
+    else
+      this.getCustomerPage(i,this.size);
   }
 }
