@@ -4,19 +4,31 @@
       <span class="display-4">New Product</span>
     </div>
     <div class="card-body">
-      {{formGroup.value|json}}
+      {{formGroup.controls['name'].errors|json}}
       <form [formGroup]="formGroup" (ngSubmit)="addNewProduct()">
         <div >
           <label class="form-label fw-bold">Name</label>
           <input type="text" class="form-control" formControlName="name">
+          <small *ngIf="formGroup.controls['name'].errors && formGroup.controls['name'].touched" class="text-danger">
+            {{getErrorMsg('name',formGroup.controls['name'].errors)}}
+          </small>
         </div>
         <div >
           <label class="form-label fw-bold">Price</label>
           <input type="text" class="form-control" formControlName="price">
+          <small *ngIf="formGroup.controls['price'].errors && formGroup.controls['price'].touched" class="text-danger">
+            {{getErrorMsg('price',formGroup.controls['price'].errors)}}
+          </small>
         </div>
+        <div >
+          <label class="form-label fw-bold">Promotion</label>
+          <input type="checkbox" class="form-check-input ms-2" formControlName="promotion">
+        </div>
+
         <div class="d-grid gap-2 mt-2">
           <button type="submit" class="btn btn-success" >Add</button>
         </div>
+
       </form>
 
     </div>

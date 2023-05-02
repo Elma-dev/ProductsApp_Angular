@@ -11,10 +11,11 @@ const routes: Routes = [
   {path:"admin",component:AdminComponent,canActivate:[AuthenticationGuard],children:[
       {path:"customers",component:CustomersComponent},
       {path:"products",component:ProductsComponent},
+      {path:"newProduct",component:NewProductComponent}
     ]},
   {path:"login",component:AuthentificationsComponent},
   {path:"",component:AuthentificationsComponent},
-  {path:"newProduct",component:NewProductComponent}
+
 ];
 
 @NgModule({

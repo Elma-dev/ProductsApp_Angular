@@ -59,8 +59,8 @@ export class ProductsService {
     return of({products:pageProduct,page:page,size:size,totalNbrPage:totalPages})
   }
 
-  public addNewProduct(name:string,price:number):Observable<boolean>{
-    this.products.push({id:UUID.UUID(),name:name,price:price,promotion:false})
+  public addNewProduct(name:string,price:number,promotion:boolean):Observable<boolean>{
+    this.products.push({id:UUID.UUID(),name:name,price:price,promotion:promotion})
     return of(true);
   }
 }
