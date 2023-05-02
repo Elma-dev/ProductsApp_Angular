@@ -37,7 +37,7 @@
       </table>
       <ul class="nav nav-pills">
         <li *ngFor="let i of pageIndex" [ngClass]="page==i?'btn-danger':'btn-outline-danger'"
-            class="btn ms-1" (click)="changePage(i)" )>
+            class="btn ms-1" (click)="changePage(i)" >
           {{i}}
         </li>
       </ul>

@@ -33,8 +33,12 @@ export class CustomersService {
     this.customers=this.customers.filter(c=>c.id!=id);
     return of(true);
   }
-  public searchCustomers(keyword:string):Observable<Array<Customer>>{
-    return of(this.customers.filter(c=>c.name.includes(keyword)));
+  public searchCustomers(keyword:string,page:number,size:number):Observable<CustomerPages>{
+    let results=this.customers.filter(c=>c.name.includes(keyword));
+    let nbrTotalePages=~~(results.length/size);
+    nbrTotalePages=results.length%size==0?nbrTotalePages:nbrTotalePages+1;
+    let customerPage=results.slice(page*size,page*size+size);
+    return of({customerPage:customerPage,page:page,size:size,totalNbrPages:nbrTotalePages});
   }
 
   public getCustomerPage(page:number,size:number):Observable<CustomerPages>{
