@@ -17,7 +17,7 @@ export class AuthentificationsService {
   }
 
   public login(username:string,password:string):Observable<UserAppModel>{
-    let userAppModel = this.appUsers.find(user=>user.username=username);
+    let userAppModel = this.appUsers.find(user=>user.username==username);
     if(userAppModel==undefined){
       return throwError(()=>new Error("this user doesn't exist"));
     }

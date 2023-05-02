@@ -1,1 +1,25 @@
-<p>authentifications works!</p>
+<div class="container">
+  <div class="card mt-2 col-md-6 offset-md-3">
+    <div class="card-header text-center display-4">
+      Authentication
+    </div>
+    <div class="card-body">
+      <div class="text-danger text-center" *ngIf="error">{{error}}</div>
+      <form [formGroup]="formGroup" (ngSubmit)="submit()">
+        <div class="mb-1">
+          <label class="form-label">username</label>
+          <input type="text" class="form-control" formControlName="username">
+        </div>
+        <div class="mb-1">
+          <label class="form-label">password</label>
+          <input type="password" class="form-control" formControlName="password">
+        </div>
+        <div class="d-grid mt-2">
+          <button type="submit" class="btn btn-success btn-sm"> submit</button>
+        </div>
+
+
+      </form>
+    </div>
+  </div>
+</div>
