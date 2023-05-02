@@ -2,6 +2,9 @@
   <ng-template #errors>
     <div class="text-danger text-center display-2">{{exception}}</div>
   </ng-template>
+  <div class="border border-danger mb-2">
+    <button class="btn btn-outline-danger m-1 text-black">new product</button>
+  </div>
   <div class="card border-danger" *ngIf="products else errors">
     <div class="card-header">
       <h2 class="text-center text-danger">Products List</h2>
