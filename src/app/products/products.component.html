@@ -29,14 +29,14 @@
               <td>
                 <i [ngClass]="p.promotion==true?'bi-heart-fill text-success' : 'bi-heart'" class="bi"></i>
               </td>
-              <td>
+              <td *ngIf="authService.hasRole('ADMIN')">
                 <button [ngClass]="p.promotion==true?'btn-warning':'btn-success'" class="btn" (click)="setPromotion(p)">
                   <span *ngIf="p.promotion==false">Promotion On</span>
                   <span *ngIf="p.promotion==true">Promotion Off</span>
                 </button>
               </td>
 
-              <td>
+              <td *ngIf="authService.hasRole('ADMIN')">
                 <button class="btn btn-danger" (click)="deleteProduct(p)">
                   <i class="bi bi-trash"></i>
                 </button>

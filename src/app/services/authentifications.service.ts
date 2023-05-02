@@ -31,10 +31,15 @@ export class AuthentificationsService {
     localStorage.setItem("user",JSON.stringify({username:user.username,roles:user.roles,jwt:"JWT Athentification"}))
     return of(true)
   }
-  public hasRole(role:string):Observable<boolean>{
-    return of(this.authenticatUser!.roles.includes(role));
+  public hasRole(role:string):boolean{
+    return (this.authenticatUser!.roles.includes(role));
   }
   public isAuthenticat():boolean{
     return (this.authenticatUser!=undefined);
+  }
+  public logout():Observable<boolean>{
+    this.authenticatUser=undefined;
+    localStorage.removeItem("user");
+    return of(true);
   }
 }

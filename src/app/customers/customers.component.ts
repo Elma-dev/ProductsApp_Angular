@@ -3,6 +3,7 @@ import {CustomersService} from "../services/customers.service";
 import {Customer} from "../models/customer.model";
 import {Product} from "../models/product.model";
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import {AuthentificationsService} from "../services/authentifications.service";
 
 @Component({
   selector: 'app-customers',
@@ -21,7 +22,9 @@ export class CustomersComponent implements OnInit{
   itsSearch:boolean=false;
 
 
-  constructor(private customerServices:CustomersService,private formBuilder:FormBuilder){
+  constructor(private customerServices:CustomersService,private formBuilder:FormBuilder
+            ,public authService:AuthentificationsService
+  ){
     this.formGroup=formBuilder.group({
       keyword:this.formBuilder.control(null)
     })

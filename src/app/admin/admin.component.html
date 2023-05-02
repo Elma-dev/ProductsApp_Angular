@@ -1,7 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-danger ">
-  <a class="navbar-brand text-white" href="#" >Navbar</a>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+  <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
+    <a class="navbar-brand text-white" routerLink="/admin" ><span class="ms-1">Home</span></a>
     <ul class="navbar-nav mr-auto">
 
       <li class="nav-item active">
@@ -11,8 +12,18 @@
       <li class="nav-item active">
         <a class="nav-link text-white" routerLink="/admin/products">products</a>
       </li>
-
     </ul>
+    <div>
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item active ">
+          <a class="nav-link text-white">{{authenticatUser.authenticatUser!.username}}</a>
+        </li>
+        <li class="nav-item active" >
+          <a class="nav-link text-white" routerLink="/login"><i (click)="logout()" class="bi bi-door-open"></i></a>
+        </li>
+      </ul>
+    </div>
+
   </div>
 </nav>
 <router-outlet>

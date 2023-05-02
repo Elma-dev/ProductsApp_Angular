@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ProductsService} from "../services/products.service";
 import {Product} from "../models/product.model";
 import {FormBuilder, FormGroup} from "@angular/forms";
+import {AuthentificationsService} from "../services/authentifications.service";
 
 @Component({
   selector: 'app-products',
@@ -18,7 +19,8 @@ export class ProductsComponent implements OnInit{
   nbrTotalPages!:number;
   listPageNbr !:Array<number>;
   searchInAll:boolean=false;
-  constructor(private productsServices:ProductsService,private formBuilder:FormBuilder) {
+  constructor(private productsServices:ProductsService,private formBuilder:FormBuilder,
+              public authService:AuthentificationsService) {
     this.formGroup=this.formBuilder.group({
       keyword:this.formBuilder.control(null)
     })
