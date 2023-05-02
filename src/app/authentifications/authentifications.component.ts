@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {AuthentificationsService} from "../services/authentifications.service";
 import {UserAppModel} from "../models/userApp.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-authentifications',
@@ -13,14 +14,15 @@ export class AuthentificationsComponent implements OnInit{
   error!:string;
   userApp!:UserAppModel;
 
-  constructor(private authentificatService:AuthentificationsService,private fb:FormBuilder) {
+  constructor(private authentificatService:AuthentificationsService,private fb:FormBuilder,private router:Router) {
+
+  }
+
+  ngOnInit(): void {
     this.formGroup=this.fb.group({
       username:this.fb.control(null),
       password:this.fb.control(null)
     })
-  }
-
-  ngOnInit(): void {
   }
 
   submit() {
@@ -32,6 +34,7 @@ export class AuthentificationsComponent implements OnInit{
         this.userApp=data;
         this.authentificatService.authenticat(this.userApp).subscribe({
           next:(data)=>{
+            this.router.navigateByUrl("/admin");
           },
           error:(err)=>{this.error=err}
         })
